@@ -69,7 +69,7 @@ export default function LoginForm() {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           >
-          Iniciar sesión
+          Entrar
         </Button>
         <Link href="/register">
         <Button
