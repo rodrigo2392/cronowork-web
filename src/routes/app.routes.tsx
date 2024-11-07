@@ -8,8 +8,8 @@ export default function AppRoutes() {
 
   return (
     <Routes>
-      <Route path="/" element={<HomePage title='Inicio' />} />
-      <Route path="/projects" element={<ProjectsPage title='Proyectos' />} />
+      <Route path="/" element={<HomePage />} />
+      <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/clients" element={<ClientsPage />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
