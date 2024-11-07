@@ -5,12 +5,12 @@ import Link from '@mui/material/Link';
 import Box from '@mui/material/Box';
 //import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from 'react';
-import logo from '../../assets/logo-h.png';
+import logo from '../../../../assets/logo-h.png';
 import { Typography } from '@mui/material';
-import { useRegister } from '../../services/auth.service';
+import { useRegister } from '../../../../services/auth.service';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { registerRequest, registerSchema } from '../../validation/auth.validation';
+import { registerRequest, registerSchema } from '../../../../validation/auth.validation';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 

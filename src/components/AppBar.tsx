@@ -12,8 +12,9 @@ import { useState } from 'react';
 import { Menu, MenuItem, Tooltip } from '@mui/material';
 import { useDispatch } from 'react-redux';
 import { signOut } from '../store/slices/auth.slice';
+import { useNavigate } from 'react-router-dom';
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -43,6 +44,7 @@ export default function AppBarItem({
   handleDrawerOpen: () => void;
   isDrawerOpen: boolean;
 }) {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
@@ -72,6 +74,7 @@ export default function AppBarItem({
 
   const doLogout = () => {
     dispatch(signOut())
+    navigate("/")
   }
 
   const renderMenu = (
@@ -156,11 +159,6 @@ export default function AppBarItem({
               <MenuIcon />
             </IconButton>
           )}
-
-          <Box>
-            <p>Inicio</p>
-          </Box>
-          
     
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
