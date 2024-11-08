@@ -1,117 +1,117 @@
-import * as React from "react";
-import { styled } from "@mui/material/styles";
-import Box from "@mui/material/Box";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { useState } from "react";
-import { Menu, MenuItem, Tooltip } from "@mui/material";
-import { useDispatch } from "react-redux";
-import { signOut } from "../store/slices/auth.slice";
-import { useNavigate } from "react-router-dom";
+import * as React from 'react'
+import { styled } from '@mui/material/styles'
+import Box from '@mui/material/Box'
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Divider from '@mui/material/Divider'
+import IconButton from '@mui/material/IconButton'
+import MenuIcon from '@mui/icons-material/Menu'
+import AccountCircle from '@mui/icons-material/AccountCircle'
+import MoreIcon from '@mui/icons-material/MoreVert'
+import { useState } from 'react'
+import { Menu, MenuItem, Tooltip } from '@mui/material'
+import { useDispatch } from 'react-redux'
+import { signOut } from '../store/slices/auth.slice'
+import { useNavigate } from 'react-router-dom'
 
-const drawerWidth = 300;
+const drawerWidth = 300
 
 interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+  open?: boolean
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
+  shouldForwardProp: prop => prop !== 'open',
 })<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
+  transition: theme.transitions.create(['margin', 'width'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
+    transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   }),
-}));
+}))
 
 export default function AppBarItem({
   handleDrawerOpen,
   isDrawerOpen,
 }: {
-  handleDrawerOpen: () => void;
-  isDrawerOpen: boolean;
+  handleDrawerOpen: () => void
+  isDrawerOpen: boolean
 }) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-    useState<null | HTMLElement>(null);
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    useState<null | HTMLElement>(null)
+  const isMenuOpen = Boolean(anchorEl)
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+    setAnchorEl(event.currentTarget)
+  }
 
   const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
+    setMobileMoreAnchorEl(null)
+  }
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
+    setAnchorEl(null)
+    handleMobileMenuClose()
+  }
 
   const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
+    setMobileMoreAnchorEl(event.currentTarget)
+  }
 
-  const mobileMenuId = "primary-search-account-menu-mobile";
+  const mobileMenuId = 'primary-search-account-menu-mobile'
 
-  const menuId = "primary-search-account-menu";
+  const menuId = 'primary-search-account-menu'
 
   const doLogout = () => {
-    dispatch(signOut());
-    navigate("/");
-  };
+    dispatch(signOut())
+    navigate('/')
+  }
 
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => console.log("erfil")}>Perfil</MenuItem>
+      <MenuItem onClick={() => console.log('erfil')}>Perfil</MenuItem>
       <Divider />
       <MenuItem onClick={doLogout}>Cerrar sesión</MenuItem>
     </Menu>
-  );
+  )
 
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
+        vertical: 'top',
+        horizontal: 'right',
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
@@ -141,12 +141,12 @@ export default function AppBarItem({
         <p>Perfil</p>
       </MenuItem>
     </Menu>
-  );
+  )
 
   return (
     <>
       <AppBar
-        style={{ position: "fixed" }}
+        style={{ position: 'fixed' }}
         position="sticky"
         open={isDrawerOpen}
         color="primary"
@@ -167,7 +167,7 @@ export default function AppBarItem({
           )}
 
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Tooltip title="Opciones de usuario">
               <IconButton
                 size="large"
@@ -182,7 +182,7 @@ export default function AppBarItem({
               </IconButton>
             </Tooltip>
           </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="show more"
@@ -199,5 +199,5 @@ export default function AppBarItem({
       {renderMobileMenu}
       {renderMenu}
     </>
-  );
+  )
 }
