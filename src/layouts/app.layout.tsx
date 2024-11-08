@@ -28,7 +28,7 @@ export default function AppLayout({ children }: { children: ReactElement }) {
           />
         </Box>
         <Main open={true}>
-             <Box
+          <Box
             sx={{
               marginBottom: 4,
               paddingLeft: { xs: 2, md: 5, lg: 10 },

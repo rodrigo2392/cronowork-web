@@ -1,33 +1,33 @@
-import { Box, Button, Typography } from "@mui/material";
-import { TablePaginationActionsProps } from "@mui/material/TablePagination/TablePaginationActions";
-import { useState } from "react";
+import { Box, Button, Typography } from '@mui/material'
+import { TablePaginationActionsProps } from '@mui/material/TablePagination/TablePaginationActions'
+import { useState } from 'react'
 
 export default function TablePaginationActions(
   props: Partial<TablePaginationActionsProps>,
 ) {
-  const [page, setPage] = useState(0);
-  const rowsPerPage = 10;
-  const count = props.count ?? 0;
+  const [page, setPage] = useState(0)
+  const rowsPerPage = 10
+  const count = props.count ?? 0
 
   const handleFirstPageButtonClick = () => {
-    setPage(0);
-  };
+    setPage(0)
+  }
 
   const handleBackButtonClick = () => {
     if (page > 0) {
-      setPage((prev) => prev - 1);
+      setPage(prev => prev - 1)
     }
-  };
+  }
 
   const handleNextButtonClick = () => {
     if (page < count) {
-      setPage((prev) => prev + 1);
+      setPage(prev => prev + 1)
     }
-  };
+  }
 
   const handleLastPageButtonClick = () => {
-    setPage(Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-  };
+    setPage(Math.max(0, Math.ceil(count / rowsPerPage) - 1))
+  }
 
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
@@ -60,5 +60,5 @@ export default function TablePaginationActions(
         <Typography variant="button">Final</Typography>
       </Button>
     </Box>
-  );
+  )
 }

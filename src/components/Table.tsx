@@ -2,12 +2,12 @@ import {
   flexRender,
   getCoreRowModel,
   useReactTable,
-} from "@tanstack/react-table";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableRow from "@mui/material/TableRow";
+} from '@tanstack/react-table'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableRow from '@mui/material/TableRow'
 import {
   Alert,
   AlertTitle,
@@ -18,52 +18,52 @@ import {
   TableHead,
   TablePagination,
   Typography,
-} from "@mui/material";
-import TablePaginationActions from "./Pagination";
-import { useDispatch } from "react-redux";
-import { useMemo } from "react";
-import { UnknownAction } from "@reduxjs/toolkit";
-import QuestionDialog from "./QuestionDialog";
-import { useSnackbar } from "react-simple-snackbar";
+} from '@mui/material'
+import TablePaginationActions from './Pagination'
+import { useDispatch } from 'react-redux'
+import { useMemo } from 'react'
+import { UnknownAction } from '@reduxjs/toolkit'
+import QuestionDialog from './QuestionDialog'
+import { useSnackbar } from 'react-simple-snackbar'
 
 interface paginationResult {
   data: {
-    docs: [];
-    totalDocs: number;
-    offset: number;
-    limit: number;
-    totalPages: number;
-    page: number;
-    pagingCounter: number;
-    hasPrevPage: boolean;
-    hasNextPage: boolean;
-    prevPage: number | null;
-    nextPage: number | null;
-  };
+    docs: []
+    totalDocs: number
+    offset: number
+    limit: number
+    totalPages: number
+    page: number
+    pagingCounter: number
+    hasPrevPage: boolean
+    hasNextPage: boolean
+    prevPage: number | null
+    nextPage: number | null
+  }
 }
 
 interface Props {
-  columns: [];
+  columns: []
   labels: {
-    deleteTitle: string;
-    deleteDescription: string;
-    deleteSuccess: string;
-  };
-  data: paginationResult;
-  isLoading: boolean;
-  error: Error | null;
-  changeRowPerPage: ({ rowsPerPage }: { rowsPerPage: number }) => UnknownAction;
-  openDelete: boolean;
+    deleteTitle: string
+    deleteDescription: string
+    deleteSuccess: string
+  }
+  data: paginationResult
+  isLoading: boolean
+  error: Error | null
+  changeRowPerPage: ({ rowsPerPage }: { rowsPerPage: number }) => UnknownAction
+  openDelete: boolean
   deleteFunction: (
     { id }: { id: string },
     { onSuccess }: { onSuccess: () => void },
-  ) => void;
-  refetch: () => void;
-  setOpenDelete: (val: boolean) => void;
-  deleteId: string;
-  isRefetching: boolean;
-  noDelete?: boolean;
-  addTitle?: string | undefined;
+  ) => void
+  refetch: () => void
+  setOpenDelete: (val: boolean) => void
+  deleteId: string
+  isRefetching: boolean
+  noDelete?: boolean
+  addTitle?: string | undefined
 }
 export default function GenericTable({
   columns,
@@ -80,22 +80,22 @@ export default function GenericTable({
   isRefetching,
 }: Props) {
   const [openSnackbar] = useSnackbar({
-    position: "bottom-right",
+    position: 'bottom-right',
     style: {
-      backgroundColor: "#2e7d32",
-      color: "white",
-      fontFamily: "Roboto",
-      fontSize: "15px",
-      textAlign: "center",
+      backgroundColor: '#2e7d32',
+      color: 'white',
+      fontFamily: 'Roboto',
+      fontSize: '15px',
+      textAlign: 'center',
     },
-  });
-  const dispatch = useDispatch();
-  const rowPerPage = [5, 10, 20, 50];
+  })
+  const dispatch = useDispatch()
+  const rowPerPage = [5, 10, 20, 50]
 
-  const page = 0;
-  const rowsPerPage = 10;
+  const page = 0
+  const rowsPerPage = 10
 
-  const defaultData = useMemo(() => [], []);
+  const defaultData = useMemo(() => [], [])
 
   const table = useReactTable({
     data: data?.data.docs || defaultData,
@@ -105,17 +105,17 @@ export default function GenericTable({
     manualPagination: true,
     debugTable: true,
     paginateExpandedRows: true,
-  });
+  })
 
   return (
     <>
       <Box
         sx={{
-          display: "flex",
+          display: 'flex',
           flexDirection: {
-            xs: "column",
-            lg: "row",
-            justifyContent: "space-between",
+            xs: 'column',
+            lg: 'row',
+            justifyContent: 'space-between',
           },
         }}
       >
@@ -127,20 +127,20 @@ export default function GenericTable({
           yesTitle="Eliminar"
           noTitle="Cancelar"
           action={() => {
-            setOpenDelete(false);
+            setOpenDelete(false)
             deleteFunction(
               { id: deleteId },
               {
                 onSuccess: () => {
-                  openSnackbar(labels.deleteSuccess);
-                  refetch();
+                  openSnackbar(labels.deleteSuccess)
+                  refetch()
                 },
               },
-            );
+            )
           }}
         />
       </Box>
-      <Box sx={{ backgroundColor: "#FFF" }}>
+      <Box sx={{ backgroundColor: '#FFF' }}>
         <TableContainer sx={{ marginTop: 4 }}>
           <Table
             className="mainTable"
@@ -149,9 +149,9 @@ export default function GenericTable({
             aria-label="spanning table"
           >
             <TableHead>
-              {table.getHeaderGroups().map((headerGroup) => (
+              {table.getHeaderGroups().map(headerGroup => (
                 <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
+                  {headerGroup.headers.map(header => (
                     <TableCell key={header.id}>
                       {header.isPlaceholder
                         ? null
@@ -170,9 +170,9 @@ export default function GenericTable({
                   <TableCell colSpan={columns.length}>
                     <Box
                       sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                       }}
                     >
                       <CircularProgress />
@@ -185,17 +185,17 @@ export default function GenericTable({
                   <TableCell colSpan={columns.length}>
                     <Box
                       sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
                       }}
                     >
                       <Alert
                         sx={{
-                          width: "100%",
-                          "& .MuiAlert-message": {
-                            textAlign: "center",
-                            width: "inherit",
+                          width: '100%',
+                          '& .MuiAlert-message': {
+                            textAlign: 'center',
+                            width: 'inherit',
                           },
                         }}
                         severity="error"
@@ -219,9 +219,9 @@ export default function GenericTable({
                   </TableCell>
                 </TableRow>
               )}
-              {table.getRowModel().rows.map((row) => (
+              {table.getRowModel().rows.map(row => (
                 <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
+                  {row.getVisibleCells().map(cell => (
                     <TableCell key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
@@ -237,10 +237,10 @@ export default function GenericTable({
                   <TableCell colSpan={columns.length}>
                     <Alert
                       sx={{
-                        width: "100%",
-                        "& .MuiAlert-message": {
-                          textAlign: "center",
-                          width: "inherit",
+                        width: '100%',
+                        '& .MuiAlert-message': {
+                          textAlign: 'center',
+                          width: 'inherit',
                         },
                       }}
                       severity="info"
@@ -265,17 +265,17 @@ export default function GenericTable({
             </TableFooter>
           </Table>
         </TableContainer>
-        <Box sx={{ display: "flex", flex: 1 }}>
+        <Box sx={{ display: 'flex', flex: 1 }}>
           <Table>
             <TableBody>
               <TableRow>
                 <TablePagination
-                  sx={{ border: "none", width: "100%" }}
+                  sx={{ border: 'none', width: '100%' }}
                   rowsPerPageOptions={rowPerPage}
                   colSpan={columns.length | 0}
                   count={data?.data.totalDocs | 0}
                   rowsPerPage={rowsPerPage}
-                  labelDisplayedRows={(page) => (
+                  labelDisplayedRows={page => (
                     <Typography
                       component="span"
                       variant="body1"
@@ -283,7 +283,7 @@ export default function GenericTable({
                   )}
                   page={page}
                   labelRowsPerPage="Por página"
-                  onRowsPerPageChange={(e) =>
+                  onRowsPerPageChange={e =>
                     dispatch(
                       changeRowPerPage({
                         rowsPerPage: parseInt(e.target.value.toString()),
@@ -299,5 +299,5 @@ export default function GenericTable({
         </Box>
       </Box>
     </>
-  );
+  )
 }

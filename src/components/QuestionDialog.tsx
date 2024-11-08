@@ -1,21 +1,21 @@
-import * as React from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useTheme } from "@mui/material/styles";
+import * as React from 'react'
+import Button from '@mui/material/Button'
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import DialogContentText from '@mui/material/DialogContentText'
+import DialogTitle from '@mui/material/DialogTitle'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
 
 interface Props {
-  open: boolean;
-  setOpen: (open: boolean) => void;
-  action: () => void;
-  title: string;
-  description: string;
-  yesTitle: string;
-  noTitle: string;
+  open: boolean
+  setOpen: (open: boolean) => void
+  action: () => void
+  title: string
+  description: string
+  yesTitle: string
+  noTitle: string
 }
 
 export default function QuestionDialog({
@@ -27,18 +27,18 @@ export default function QuestionDialog({
   yesTitle,
   noTitle,
 }: Props) {
-  const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const theme = useTheme()
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleClose = () => {
-    setOpen(false);
-  };
+    setOpen(false)
+  }
 
   const handleAction = () => {
     if (action) {
-      action();
+      action()
     }
-  };
+  }
 
   return (
     <React.Fragment>
@@ -62,5 +62,5 @@ export default function QuestionDialog({
         </DialogActions>
       </Dialog>
     </React.Fragment>
-  );
+  )
 }

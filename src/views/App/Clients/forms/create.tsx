@@ -1,6 +1,6 @@
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
+import Box from '@mui/material/Box'
+import Typography from '@mui/material/Typography'
+import Modal from '@mui/material/Modal'
 import {
   Card,
   CardContent,
@@ -9,32 +9,32 @@ import {
   TextField,
   CardActions,
   Button,
-} from "@mui/material";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
+} from '@mui/material'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
 import {
   useCreateClient,
   useGetClientById,
   useUpdateClient,
-} from "../../../../services/clients.service";
-import { createClientSchema } from "../../../../validation/clients.validation";
-import { useEffect } from "react";
-import { useQueryClient } from "@tanstack/react-query";
+} from '../../../../services/clients.service'
+import { createClientSchema } from '../../../../validation/clients.validation'
+import { useEffect } from 'react'
+import { useQueryClient } from '@tanstack/react-query'
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   maxWidth: 1200,
   p: 4,
-};
+}
 interface Props {
-  visible: boolean;
-  setVisible: (visible: boolean) => void;
-  refetch: () => void;
-  id?: string | undefined;
-  edit: boolean;
+  visible: boolean
+  setVisible: (visible: boolean) => void
+  refetch: () => void
+  id?: string | undefined
+  edit: boolean
 }
 export default function CreateModal({
   visible,
@@ -43,11 +43,11 @@ export default function CreateModal({
   edit = false,
   id,
 }: Props) {
-  const queryClient = useQueryClient();
-  const { mutate: createClient, error } = useCreateClient();
-  const { mutate: updateClient, error: updateError } = useUpdateClient();
+  const queryClient = useQueryClient()
+  const { mutate: createClient, error } = useCreateClient()
+  const { mutate: updateClient, error: updateError } = useUpdateClient()
 
-  const { data: clientData } = useGetClientById(id);
+  const { data: clientData } = useGetClientById(id)
 
   const {
     handleSubmit,
@@ -56,36 +56,36 @@ export default function CreateModal({
     reset,
   } = useForm({
     resolver: yupResolver(createClientSchema),
-  });
+  })
 
   const handleCreate = (data: { name: string; email: string }) => {
     if (edit) {
       return updateClient(data, {
         onSuccess: () => {
-          refetch();
-          queryClient.invalidateQueries({ queryKey: ["getClientbyId", id] });
-          setVisible(false);
+          refetch()
+          queryClient.invalidateQueries({ queryKey: ['getClientbyId', id] })
+          setVisible(false)
         },
-      });
+      })
     }
     return createClient(data, {
       onSuccess: () => {
-        refetch();
-        setVisible(false);
+        refetch()
+        setVisible(false)
       },
-    });
-  };
+    })
+  }
 
   useEffect(() => {
     if (clientData) {
-      reset(clientData?.data?.user);
+      reset(clientData?.data?.user)
     } else {
       reset({
-        name: "",
-        email: "",
-      });
+        name: '',
+        email: '',
+      })
     }
-  }, [clientData, reset]);
+  }, [clientData, reset])
 
   return (
     <div>
@@ -102,7 +102,7 @@ export default function CreateModal({
               component="form"
               onSubmit={handleSubmit(handleCreate)}
               noValidate
-              sx={{ mt: 1, textAlign: "center" }}
+              sx={{ mt: 1, textAlign: 'center' }}
             >
               <Card sx={{ paddingX: 2, paddingY: 2 }}>
                 <CardContent>
@@ -116,14 +116,14 @@ export default function CreateModal({
                     </Alert>
                   )}
 
-                  <Box sx={{ textAlign: "left", mb: 2 }}>
+                  <Box sx={{ textAlign: 'left', mb: 2 }}>
                     <FormLabel>Nombre</FormLabel>
                     <TextField
                       margin="normal"
                       placeholder="Nombre"
                       required
                       fullWidth
-                      {...register("name")}
+                      {...register('name')}
                       id="name"
                       autoFocus
                     />
@@ -134,7 +134,7 @@ export default function CreateModal({
                       </Typography>
                     )}
                   </Box>
-                  <Box sx={{ textAlign: "left" }}>
+                  <Box sx={{ textAlign: 'left' }}>
                     <FormLabel>Email</FormLabel>
                     <TextField
                       margin="normal"
@@ -142,7 +142,7 @@ export default function CreateModal({
                       disabled={edit}
                       required
                       fullWidth
-                      {...register("email")}
+                      {...register('email')}
                       type="email"
                       id="email"
                     />
@@ -154,12 +154,12 @@ export default function CreateModal({
                     )}
                   </Box>
                 </CardContent>
-                <CardActions sx={{ flex: 1, justifyContent: "space-between" }}>
+                <CardActions sx={{ flex: 1, justifyContent: 'space-between' }}>
                   <Button onClick={() => setVisible(false)} variant="text">
                     Cancelar
                   </Button>
                   <Button type="submit" variant="contained">
-                    {edit ? "Guardar" : "Agregar"}
+                    {edit ? 'Guardar' : 'Agregar'}
                   </Button>
                 </CardActions>
               </Card>
@@ -168,5 +168,5 @@ export default function CreateModal({
         </Box>
       </Modal>
     </div>
-  );
+  )
 }

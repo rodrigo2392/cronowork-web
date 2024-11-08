@@ -1,43 +1,43 @@
-import { useState } from "react";
-import { Box, Button, Typography } from "@mui/material";
-import AppLayout from "../../../layouts/app.layout";
-import columnDefinition from "./column-definition";
-import GenericTable from "../../../components/Table";
+import { useState } from 'react'
+import { Box, Button, Typography } from '@mui/material'
+import AppLayout from '../../../layouts/app.layout'
+import columnDefinition from './column-definition'
+import GenericTable from '../../../components/Table'
 import {
   useGetProjects,
   useDeleteProject,
-} from "../../../services/projects.service";
-import CreateModal from "./forms/create";
-import { UnknownAction } from "@reduxjs/toolkit";
-import paginationResult from "../../../types/table.types";
-import PlusIcon from "@mui/icons-material/Add";
+} from '../../../services/projects.service'
+import CreateModal from './forms/create'
+import { UnknownAction } from '@reduxjs/toolkit'
+import paginationResult from '../../../types/table.types'
+import PlusIcon from '@mui/icons-material/Add'
 
 export default function Projects() {
-  const [editId, setEditId] = useState<string | undefined>();
-  const [showCreateModal, setCreateModal] = useState(false);
-  const [deleteId, setDeleteId] = useState("");
-  const { data, isLoading, isRefetching, error, refetch } = useGetProjects();
-  const { mutate: removeClient } = useDeleteProject();
-  const [openDelete, setOpenDelete] = useState(false);
+  const [editId, setEditId] = useState<string | undefined>()
+  const [showCreateModal, setCreateModal] = useState(false)
+  const [deleteId, setDeleteId] = useState('')
+  const { data, isLoading, isRefetching, error, refetch } = useGetProjects()
+  const { mutate: removeClient } = useDeleteProject()
+  const [openDelete, setOpenDelete] = useState(false)
 
   const labels = {
-    deleteTitle: "¿Seguro que deseas eliminar este proyecto?",
+    deleteTitle: '¿Seguro que deseas eliminar este proyecto?',
     deleteDescription:
-      "El proyecto será eliminado permanentemente del sistema y no podrá ser recuperado.",
-    deleteSuccess: "Elemento eliminado correctamente.",
-  };
+      'El proyecto será eliminado permanentemente del sistema y no podrá ser recuperado.',
+    deleteSuccess: 'Elemento eliminado correctamente.',
+  }
 
   const deleteFunction = (id: string) => {
-    setDeleteId(id);
-    setOpenDelete(true);
-  };
+    setDeleteId(id)
+    setOpenDelete(true)
+  }
 
   const editFunction = (id: string) => {
-    setEditId(id);
-    setCreateModal(true);
-  };
+    setEditId(id)
+    setCreateModal(true)
+  }
 
-  const columns = columnDefinition({ deleteFunction, editFunction });
+  const columns = columnDefinition({ deleteFunction, editFunction })
   return (
     <AppLayout>
       <Box sx={{ mb: 4, ml: 2 }}>
@@ -52,12 +52,12 @@ export default function Projects() {
         <Box sx={{ mt: 4 }}>
           <Box>
             <Box
-              sx={{ display: "flex", gap: 2, marginTop: 2, marginBottom: 2 }}
+              sx={{ display: 'flex', gap: 2, marginTop: 2, marginBottom: 2 }}
             >
               <Button
                 onClick={() => {
-                  setCreateModal(true);
-                  setEditId(undefined);
+                  setCreateModal(true)
+                  setEditId(undefined)
                 }}
                 size="small"
                 variant="contained"
@@ -74,7 +74,7 @@ export default function Projects() {
             labels={labels}
             columns={columns as []}
             changeRowPerPage={() =>
-              console.log("change") as unknown as UnknownAction
+              console.log('change') as unknown as UnknownAction
             }
             openDelete={openDelete}
             setOpenDelete={setOpenDelete}
@@ -86,5 +86,5 @@ export default function Projects() {
         </Box>
       </Box>
     </AppLayout>
-  );
+  )
 }
