@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MoreIcon from '@mui/icons-material/MoreVert';
-import { useState } from 'react';
-import { Menu, MenuItem, Tooltip } from '@mui/material';
-import { useDispatch } from 'react-redux';
-import { signOut } from '../store/slices/auth.slice';
-import { useNavigate } from 'react-router-dom';
+import * as React from "react";
+import { styled } from "@mui/material/styles";
+import Box from "@mui/material/Box";
+import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import Divider from "@mui/material/Divider";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import AccountCircle from "@mui/icons-material/AccountCircle";
+import MoreIcon from "@mui/icons-material/MoreVert";
+import { useState } from "react";
+import { Menu, MenuItem, Tooltip } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { signOut } from "../store/slices/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 300;
 
@@ -21,25 +21,25 @@ interface AppBarProps extends MuiAppBarProps {
 }
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open'
+  shouldForwardProp: (prop) => prop !== "open",
 })<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
+  transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen
+    duration: theme.transitions.duration.leavingScreen,
   }),
   ...(open && {
     width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
+    transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen
-    })
-  })
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
 }));
 
 export default function AppBarItem({
   handleDrawerOpen,
-  isDrawerOpen
+  isDrawerOpen,
 }: {
   handleDrawerOpen: () => void;
   isDrawerOpen: boolean;
@@ -47,7 +47,8 @@ export default function AppBarItem({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState<null | HTMLElement>(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
+    useState<null | HTMLElement>(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -68,31 +69,32 @@ export default function AppBarItem({
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const mobileMenuId = 'primary-search-account-menu-mobile';
+  const mobileMenuId = "primary-search-account-menu-mobile";
 
-  const menuId = 'primary-search-account-menu';
+  const menuId = "primary-search-account-menu";
 
   const doLogout = () => {
-    dispatch(signOut())
-    navigate("/")
-  }
+    dispatch(signOut());
+    navigate("/");
+  };
 
   const renderMenu = (
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
+        vertical: "top",
+        horizontal: "right",
       }}
       id={menuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMenuOpen}
-      onClose={handleMenuClose}>
-      <MenuItem onClick={() => console.log('erfil')}>Perfil</MenuItem>
+      onClose={handleMenuClose}
+    >
+      <MenuItem onClick={() => console.log("erfil")}>Perfil</MenuItem>
       <Divider />
       <MenuItem onClick={doLogout}>Cerrar sesión</MenuItem>
     </Menu>
@@ -102,17 +104,18 @@ export default function AppBarItem({
     <Menu
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
+        vertical: "top",
+        horizontal: "right",
       }}
       id={mobileMenuId}
       keepMounted
       transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right'
+        vertical: "top",
+        horizontal: "right",
       }}
       open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}>
+      onClose={handleMobileMenuClose}
+    >
       {/*
           <MenuItem>
             <IconButton size="large" aria-label="show 4 new mails">
@@ -131,7 +134,8 @@ export default function AppBarItem({
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit">
+          color="inherit"
+        >
           <AccountCircle />
         </IconButton>
         <p>Perfil</p>
@@ -142,11 +146,12 @@ export default function AppBarItem({
   return (
     <>
       <AppBar
-        style={{ position: 'fixed' }}
+        style={{ position: "fixed" }}
         position="sticky"
         open={isDrawerOpen}
         color="primary"
-        enableColorOnDark>
+        enableColorOnDark
+      >
         <Toolbar>
           {!isDrawerOpen && (
             <IconButton
@@ -155,15 +160,14 @@ export default function AppBarItem({
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
-              onClick={handleDrawerOpen}>
+              onClick={handleDrawerOpen}
+            >
               <MenuIcon />
             </IconButton>
           )}
-    
+
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            
-            
+          <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <Tooltip title="Opciones de usuario">
               <IconButton
                 size="large"
@@ -172,19 +176,21 @@ export default function AppBarItem({
                 aria-controls={menuId}
                 aria-haspopup="true"
                 onClick={handleProfileMenuOpen}
-                color="inherit">
+                color="inherit"
+              >
                 <AccountCircle />
               </IconButton>
             </Tooltip>
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="show more"
               aria-controls={mobileMenuId}
               aria-haspopup="true"
               onClick={handleMobileMenuOpen}
-              color="inherit">
+              color="inherit"
+            >
               <MoreIcon />
             </IconButton>
           </Box>

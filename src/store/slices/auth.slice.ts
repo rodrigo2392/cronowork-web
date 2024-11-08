@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../index';
+import { createSlice } from "@reduxjs/toolkit";
+import type { PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "../index";
 
 interface User {
   name: string;
@@ -10,16 +10,16 @@ interface User {
 export interface AuthState {
   token: string | null;
   refresh_token: string | null;
-  user?: User | null
+  user?: User | null;
 }
 const initialState: AuthState = {
   token: null,
   refresh_token: null,
-  user: null
+  user: null,
 };
 
 export const authSlice = createSlice({
-  name: 'authState',
+  name: "authState",
   initialState,
   reducers: {
     signIn: (state, action: PayloadAction<AuthState>) => {
@@ -34,7 +34,7 @@ export const authSlice = createSlice({
       state.token = action.payload.token;
       state.refresh_token = action.payload.refresh_token;
     },
-  }
+  },
 });
 
 export const { signIn, signOut, refreshToken } = authSlice.actions;

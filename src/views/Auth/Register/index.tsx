@@ -1,5 +1,5 @@
-import RegisterForm from './forms/register';
-import AuthLayout from '../../../layouts/auth.layout';
+import RegisterForm from "./forms/register";
+import AuthLayout from "../../../layouts/auth.layout";
 
 export default function Login() {
   return (
