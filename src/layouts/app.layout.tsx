@@ -1,11 +1,19 @@
 import Box from '@mui/material/Box'
 import CssBaseline from '@mui/material/CssBaseline'
-import { ReactElement } from 'react'
 import AppBarItem from '../components/AppBar'
 import DrawerComponent from '../components/Drawer'
 import Main from '../components/Main'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeDrawer, selectDrawerOpened } from '../store/slices/app.slice'
+import { Outlet } from 'react-router-dom'
 
-export default function AppLayout({ children }: { children: ReactElement }) {
+export default function AppLayout() {
+  const dispatch = useDispatch()
+  const open = useSelector(selectDrawerOpened)
+
+  const handleDrawerOpen = () => {
+    dispatch(changeDrawer())
+  }
   return (
     <>
       <Box
@@ -18,16 +26,13 @@ export default function AppLayout({ children }: { children: ReactElement }) {
       >
         <Box sx={{ display: 'flex' }}>
           <CssBaseline />
-          <AppBarItem
-            isDrawerOpen={true}
-            handleDrawerOpen={() => console.log(true)}
-          />
+          <AppBarItem isDrawerOpen={open} handleDrawerOpen={handleDrawerOpen} />
           <DrawerComponent
-            isDrawerOpen={true}
-            handleDrawerOpen={() => console.log(true)}
+            isDrawerOpen={open}
+            handleDrawerOpen={handleDrawerOpen}
           />
         </Box>
-        <Main open={true}>
+        <Main open={open}>
           <Box
             sx={{
               marginBottom: 4,
@@ -35,7 +40,7 @@ export default function AppLayout({ children }: { children: ReactElement }) {
               paddingRight: { xs: 2, md: 5, lg: 10 },
             }}
           >
-            {children}
+            <Outlet />
           </Box>
         </Main>
       </Box>

@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from '@mui/material'
-import AppLayout from '../../../layouts/app.layout'
 import GenericTable from '../../../components/Table'
 import {
   useGetClients,
@@ -40,52 +39,48 @@ export default function Clients() {
   const columns = columnDefinition({ deleteFunction, editFunction })
 
   return (
-    <AppLayout>
-      <Box sx={{ mb: 4, ml: 2 }}>
-        <CreateModal
-          id={editId}
-          edit={!!editId}
-          refetch={refetch}
-          visible={showCreateModal}
-          setVisible={setCreateModal}
-        />
-        <Typography variant="h4">Clients</Typography>
-        <Box sx={{ mt: 4 }}>
-          <Box>
-            <Box
-              sx={{ display: 'flex', gap: 2, marginTop: 2, marginBottom: 2 }}
+    <Box sx={{ mb: 4, ml: 2 }}>
+      <CreateModal
+        id={editId}
+        edit={!!editId}
+        refetch={refetch}
+        visible={showCreateModal}
+        setVisible={setCreateModal}
+      />
+      <Typography variant="h4">Clientes</Typography>
+      <Box sx={{ mt: 4 }}>
+        <Box>
+          <Box sx={{ display: 'flex', gap: 2, marginTop: 2, marginBottom: 2 }}>
+            <Button
+              onClick={() => {
+                setCreateModal(true)
+                setEditId(undefined)
+              }}
+              size="small"
+              variant="contained"
+              startIcon={<PlusIcon />}
             >
-              <Button
-                onClick={() => {
-                  setCreateModal(true)
-                  setEditId(undefined)
-                }}
-                size="small"
-                variant="contained"
-                startIcon={<PlusIcon />}
-              >
-                Agregar
-              </Button>
-            </Box>
+              Agregar
+            </Button>
           </Box>
-          <GenericTable
-            data={data as paginationResult}
-            isLoading={isLoading}
-            error={error}
-            labels={labels}
-            columns={columns as []}
-            changeRowPerPage={() =>
-              console.log('change') as unknown as UnknownAction
-            }
-            openDelete={openDelete}
-            setOpenDelete={setOpenDelete}
-            refetch={refetch}
-            isRefetching={isRefetching}
-            deleteFunction={removeClient}
-            deleteId={deleteId}
-          />
         </Box>
+        <GenericTable
+          data={data as paginationResult}
+          isLoading={isLoading}
+          error={error}
+          labels={labels}
+          columns={columns as []}
+          changeRowPerPage={() =>
+            console.log('change') as unknown as UnknownAction
+          }
+          openDelete={openDelete}
+          setOpenDelete={setOpenDelete}
+          refetch={refetch}
+          isRefetching={isRefetching}
+          deleteFunction={removeClient}
+          deleteId={deleteId}
+        />
       </Box>
-    </AppLayout>
+    </Box>
   )
 }

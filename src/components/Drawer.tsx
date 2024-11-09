@@ -1,16 +1,15 @@
 import { styled } from '@mui/material/styles'
 import Drawer from '@mui/material/Drawer'
 import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
 import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import Home from '@mui/icons-material/Home'
-import Person from '@mui/icons-material/Person'
-import AccountBox from '@mui/icons-material/Widgets'
+
 import { Box, Tooltip } from '@mui/material'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import DrawerItems from './DrawerItems'
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -64,44 +63,18 @@ export default function DrawerComponent({
           />
         </Tooltip>
       </DrawerHeader>
-      <Divider />
       <List>
-        <ListItem key={'/'} disablePadding>
-          <ListItemButton
-            selected={pathname === '/'}
-            LinkComponent={'a'}
-            href="/"
-          >
-            <ListItemIcon>
-              <Home />
-            </ListItemIcon>
-            <ListItemText primary="Inicio" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem key={'/projects'} disablePadding>
-          <ListItemButton
-            selected={pathname === '/projects'}
-            LinkComponent={'a'}
-            href="/projects"
-          >
-            <ListItemIcon>
-              <AccountBox />
-            </ListItemIcon>
-            <ListItemText primary="Proyectos" />
-          </ListItemButton>
-        </ListItem>
-        <ListItem key={'/clients'} disablePadding>
-          <ListItemButton
-            selected={pathname === '/clients'}
-            LinkComponent={'a'}
-            href="/clients"
-          >
-            <ListItemIcon>
-              <Person />
-            </ListItemIcon>
-            <ListItemText primary="Clientes" />
-          </ListItemButton>
-        </ListItem>
+        <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+          <ListItem key="/" disablePadding>
+            <ListItemButton selected={pathname === '/'} LinkComponent={'p'}>
+              <ListItemIcon>
+                <Home />
+              </ListItemIcon>
+              <ListItemText primary="Inicio" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
+        <DrawerItems pathname={pathname} />
       </List>
     </Drawer>
   )

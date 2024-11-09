@@ -3,13 +3,9 @@ import Paper from '@mui/material/Paper'
 import Box from '@mui/material/Box'
 import Grid from '@mui/material/Grid2'
 import cover from '../assets/bg.png'
-import { ReactElement } from 'react'
+import { Outlet } from 'react-router-dom'
 
-export default function AuthLayout({
-  children,
-}: {
-  children: ReactElement | ReactElement[]
-}) {
+export default function AuthLayout() {
   return (
     <>
       <CssBaseline />
@@ -36,7 +32,7 @@ export default function AuthLayout({
                 overflow: 'hidden',
               }}
             >
-              {children}
+              <Outlet />
             </Box>
           </Grid>
         </Grid>

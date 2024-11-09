@@ -7,12 +7,14 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import LogoutIcon from '@mui/icons-material/Logout'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import { useState } from 'react'
-import { Menu, MenuItem, Tooltip } from '@mui/material'
+import { Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { useDispatch } from 'react-redux'
 import { signOut } from '../store/slices/auth.slice'
 import { useNavigate } from 'react-router-dom'
+import ArrowBack from '@mui/icons-material/ArrowBack'
 
 const drawerWidth = 300
 
@@ -94,9 +96,32 @@ export default function AppBarItem({
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={() => console.log('erfil')}>Perfil</MenuItem>
+      <MenuItem onClick={() => console.log('erfil')}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        Perfil
+      </MenuItem>
       <Divider />
-      <MenuItem onClick={doLogout}>Cerrar sesión</MenuItem>
+      <MenuItem onClick={doLogout}>
+        {' '}
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <LogoutIcon />
+        </IconButton>
+        Cerrar sesión
+      </MenuItem>
     </Menu>
   )
 
@@ -127,7 +152,6 @@ export default function AppBarItem({
           </MenuItem>
 
             */}
-
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
@@ -138,7 +162,20 @@ export default function AppBarItem({
         >
           <AccountCircle />
         </IconButton>
-        <p>Perfil</p>
+        <Typography variant="body2">Perfil</Typography>
+      </MenuItem>
+      <Divider />
+      <MenuItem onClick={doLogout}>
+        <IconButton
+          size="large"
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <LogoutIcon />
+        </IconButton>
+        <Typography variant="body2">Cerrar sesión</Typography>
       </MenuItem>
     </Menu>
   )
@@ -153,18 +190,16 @@ export default function AppBarItem({
         enableColorOnDark
       >
         <Toolbar>
-          {!isDrawerOpen && (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="open drawer"
-              sx={{ mr: 2 }}
-              onClick={handleDrawerOpen}
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            sx={{ mr: 2 }}
+            onClick={handleDrawerOpen}
+          >
+            {!isDrawerOpen ? <MenuIcon /> : <ArrowBack />}
+          </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
