@@ -18,12 +18,28 @@ import {
 } from '../../../../validation/auth.validation'
 import { AxiosError } from 'axios'
 import { useLocation } from 'react-router-dom'
+import { initializeApp } from 'firebase/app'
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyDhfZ2UbUhYQxa3GtCY5gc5cd2JOHL2xuU',
+  authDomain: 'cronowork-db1d8.firebaseapp.com',
+  projectId: 'cronowork-db1d8',
+  storageBucket: 'cronowork-db1d8.firebasestorage.app',
+  messagingSenderId: '681569414188',
+  appId: '1:681569414188:web:bbe45167c1a09efefdf589',
+}
+
+initializeApp(firebaseConfig)
 
 function useQuery() {
   const { search } = useLocation()
 
   return useMemo(() => new URLSearchParams(search), [search])
 }
+const provider = new GoogleAuthProvider()
+
+const auth = getAuth()
 
 export default function LoginForm() {
   const query = useQuery()
@@ -56,6 +72,15 @@ export default function LoginForm() {
         },
       },
     )
+  }
+
+  const loginWithGoogle = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider)
+      console.log({ result })
+    } catch (error) {
+      console.log({ error })
+    }
   }
 
   const resource = query.get('resource')
@@ -151,6 +176,15 @@ export default function LoginForm() {
           sx={{ mt: 3, mb: 2 }}
         >
           Entrar
+        </Button>
+        <Button
+          onClick={loginWithGoogle}
+          color="error"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
+          Entrar con google
         </Button>
         <Link href="/register">
           <Button

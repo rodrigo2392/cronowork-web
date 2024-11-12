@@ -22,6 +22,21 @@ interface LinkItem {
 export default function DrawerItems({ pathname }: { pathname: string }) {
   const links: Partial<LinkItem>[] = [
     {
+      divider: false,
+    },
+    {
+      title: 'Cronómetro',
+      icon: <WatchIcon />,
+      url: '/track',
+      enabled: true,
+    },
+    {
+      title: 'Calendario',
+      icon: <CalendarIcon />,
+      url: '/calendar',
+      enabled: false,
+    },
+    {
       title: 'Clientes',
       icon: <Person />,
       url: '/clients',
@@ -32,21 +47,6 @@ export default function DrawerItems({ pathname }: { pathname: string }) {
       icon: <AccountBox />,
       url: '/projects',
       enabled: true,
-    },
-    {
-      divider: false,
-    },
-    {
-      title: 'Cronómetro',
-      icon: <WatchIcon />,
-      url: '/track',
-      enabled: false,
-    },
-    {
-      title: 'Calendario',
-      icon: <CalendarIcon />,
-      url: '/calendar',
-      enabled: false,
     },
   ]
   return (
