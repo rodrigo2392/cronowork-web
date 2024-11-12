@@ -6,6 +6,7 @@ import Box from '@mui/material/Box'
 //import Grid from '@mui/material/Grid2';
 import { useEffect, useState } from 'react'
 import logo from '../../../../assets/logo-h.png'
+import logow from '../../../../assets/logo-w.png'
 import { Typography } from '@mui/material'
 import { useRegister } from '../../../../services/auth.service'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,6 +17,8 @@ import {
 } from '../../../../validation/auth.validation'
 import { AxiosError } from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { selectTheme } from '../../../../store/slices/app.slice'
 
 export default function LoginForm() {
   const navigate = useNavigate()
@@ -43,6 +46,8 @@ export default function LoginForm() {
     )
   }
 
+  const theme = useSelector(selectTheme)
+
   return (
     <Box
       className={`animated-form  ${show ? 'opacity ' : 'hidden'}`}
@@ -65,7 +70,7 @@ export default function LoginForm() {
       >
         <Box
           sx={{
-            backgroundImage: `url(${logo})`,
+            backgroundImage: `url(${theme === 'dark' ? logow : logo})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             height: '120px',

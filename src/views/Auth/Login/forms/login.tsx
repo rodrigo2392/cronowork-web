@@ -6,8 +6,9 @@ import Box from '@mui/material/Box'
 //import Grid from '@mui/material/Grid2';
 import { useEffect, useState, useMemo } from 'react'
 import logo from '../../../../assets/logo-h.png'
+import logow from '../../../../assets/logo-w.png'
 import { Typography } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signIn } from '../../../../store/slices/auth.slice'
 import { useLogin } from '../../../../services/auth.service'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -19,7 +20,8 @@ import {
 import { AxiosError } from 'axios'
 import { useLocation } from 'react-router-dom'
 import { initializeApp } from 'firebase/app'
-import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
+import { selectTheme } from '../../../../store/slices/app.slice'
+// import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDhfZ2UbUhYQxa3GtCY5gc5cd2JOHL2xuU',
@@ -37,9 +39,9 @@ function useQuery() {
 
   return useMemo(() => new URLSearchParams(search), [search])
 }
-const provider = new GoogleAuthProvider()
+// const provider = new GoogleAuthProvider()
 
-const auth = getAuth()
+// const auth = getAuth()
 
 export default function LoginForm() {
   const query = useQuery()
@@ -74,16 +76,17 @@ export default function LoginForm() {
     )
   }
 
-  const loginWithGoogle = async () => {
+  /*const loginWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider)
       console.log({ result })
     } catch (error) {
       console.log({ error })
     }
-  }
+  }*/
 
   const resource = query.get('resource')
+  const theme = useSelector(selectTheme)
 
   return (
     <Box
@@ -107,7 +110,7 @@ export default function LoginForm() {
       >
         <Box
           sx={{
-            backgroundImage: `url(${logo})`,
+            backgroundImage: `url(${theme === 'dark' ? logow : logo})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             height: '120px',
@@ -177,7 +180,8 @@ export default function LoginForm() {
         >
           Entrar
         </Button>
-        <Button
+        {/*
+<Button
           onClick={loginWithGoogle}
           color="error"
           fullWidth
@@ -186,6 +190,8 @@ export default function LoginForm() {
         >
           Entrar con google
         </Button>
+          */}
+
         <Link href="/register">
           <Button
             color="secondary"

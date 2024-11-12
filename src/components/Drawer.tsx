@@ -54,7 +54,7 @@ export default function DrawerComponent({
         <Tooltip title="Tu compañero de ventas">
           <Box
             component="img"
-            src={'/logo-h.png'}
+            src={'/logo.png'}
             sx={{
               objectFit: 'contain',
               cursor: 'pointer',

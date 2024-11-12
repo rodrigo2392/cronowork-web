@@ -7,14 +7,17 @@ import Divider from '@mui/material/Divider'
 import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
+import DarkMode from '@mui/icons-material/DarkMode'
+import LightMode from '@mui/icons-material/LightMode'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import { useState } from 'react'
 import { Menu, MenuItem, Tooltip, Typography } from '@mui/material'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signOut } from '../store/slices/auth.slice'
 import { useNavigate } from 'react-router-dom'
 import ArrowBack from '@mui/icons-material/ArrowBack'
+import { changeTheme, selectTheme } from '../store/slices/app.slice'
 
 const drawerWidth = 300
 
@@ -53,6 +56,7 @@ export default function AppBarItem({
     useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
+  const theme = useSelector(selectTheme)
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -106,7 +110,7 @@ export default function AppBarItem({
         >
           <AccountCircle />
         </IconButton>
-        Perfil
+        <Typography variant="body2">Perfil</Typography>
       </MenuItem>
       <Divider />
       <MenuItem onClick={doLogout}>
@@ -120,7 +124,7 @@ export default function AppBarItem({
         >
           <LogoutIcon />
         </IconButton>
-        Cerrar sesión
+        <Typography variant="body2">Cerrar sesión</Typography>
       </MenuItem>
     </Menu>
   )
@@ -180,6 +184,10 @@ export default function AppBarItem({
     </Menu>
   )
 
+  const changeMainTheme = () => {
+    dispatch(changeTheme())
+  }
+
   return (
     <>
       <AppBar
@@ -202,6 +210,27 @@ export default function AppBarItem({
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
+          <Box sx={{ marginRight: 2 }}>
+            <Tooltip
+              title={
+                theme === 'light'
+                  ? 'Cambiar a modo oscuro'
+                  : 'Cambiar a modo claro'
+              }
+            >
+              <IconButton
+                size="large"
+                edge="end"
+                aria-label="account of current user"
+                aria-controls={menuId}
+                aria-haspopup="true"
+                onClick={changeMainTheme}
+                color="inherit"
+              >
+                {theme === 'light' ? <DarkMode /> : <LightMode />}
+              </IconButton>
+            </Tooltip>
+          </Box>
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Tooltip title="Opciones de usuario">
               <IconButton

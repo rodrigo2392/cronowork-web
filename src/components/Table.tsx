@@ -13,6 +13,7 @@ import {
   AlertTitle,
   Box,
   Button,
+  Card,
   CircularProgress,
   TableFooter,
   TableHead,
@@ -140,7 +141,7 @@ export default function GenericTable({
           }}
         />
       </Box>
-      <Box sx={{ backgroundColor: '#FFF' }}>
+      <Card>
         <TableContainer sx={{ marginTop: 4 }}>
           <Table
             className="mainTable"
@@ -265,7 +266,7 @@ export default function GenericTable({
             </TableFooter>
           </Table>
         </TableContainer>
-        <Box sx={{ display: 'flex', flex: 1 }}>
+        <Box sx={{ display: 'flex', flex: 1, marginTop: 2 }}>
           <Table>
             <TableBody>
               <TableRow>
@@ -297,7 +298,7 @@ export default function GenericTable({
             </TableBody>
           </Table>
         </Box>
-      </Box>
+      </Card>
     </>
   )
 }

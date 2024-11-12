@@ -6,7 +6,7 @@ const Main = styled('main', { shouldForwardProp: prop => prop !== 'open' })<{
   open?: boolean
 }>(({ theme, open }) => ({
   flexGrow: 1,
-  backgroundColor: '#f0f2f5',
+  backgroundColor: theme.palette.background.default,
   minHeight: '99vh',
   paddingTop: theme.spacing(10),
   transition: theme.transitions.create('margin', {

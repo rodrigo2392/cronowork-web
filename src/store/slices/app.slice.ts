@@ -3,11 +3,13 @@ import type { RootState } from '../'
 
 interface AppState {
   theme: string
+  themeColor: string
   drawerOpened: boolean
   rowsPerPage: number
 }
 const initialState: AppState = {
   theme: 'light',
+  themeColor: '',
   drawerOpened: true,
   rowsPerPage: 10,
 }
