@@ -37,13 +37,13 @@ export default function ColumnDefinition({ deleteFunction }: Props) {
       footer: info => info.column.id,
     }),
     columnHelper.accessor(row => row.project, {
-      id: 'project',
+      id: 'client',
       header: () => <Typography fontWeight="bold">Cliente</Typography>,
       cell: info => info.getValue().client.name,
       footer: info => info.column.id,
     }),
     columnHelper.accessor(row => row.project, {
-      id: 'project',
+      id: 'projectname',
       header: () => <Typography fontWeight="bold">Proyecto</Typography>,
       cell: info => info.getValue().name,
       footer: info => info.column.id,

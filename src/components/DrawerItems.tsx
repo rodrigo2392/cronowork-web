@@ -60,6 +60,7 @@ export default function DrawerItems({ pathname }: { pathname: string }) {
             <Link
               to={el.url ?? ''}
               style={{ color: 'inherit', textDecoration: 'inherit' }}
+              key={el.url}
             >
               <ListItem key={el.url} disablePadding>
                 <ListItemButton
