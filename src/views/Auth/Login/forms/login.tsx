@@ -114,7 +114,7 @@ export default function LoginForm() {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
             height: '120px',
-            minWidth: '400px',
+            minWidth: { xs: '350px', md: '400px' },
           }}
         />
         <Typography variant="h5" fontWeight="bold">
@@ -135,7 +135,7 @@ export default function LoginForm() {
           )}
         </Box>
 
-        <Box sx={{ textAlign: 'left' }}>
+        <Box sx={{ textAlign: 'left', paddingX: 4 }}>
           <TextField
             margin="normal"
             placeholder="Email"
@@ -150,7 +150,7 @@ export default function LoginForm() {
             <Typography color="error">{errors.email.message}</Typography>
           )}
         </Box>
-        <Box sx={{ textAlign: 'left' }}>
+        <Box sx={{ textAlign: 'left', paddingX: 4 }}>
           <TextField
             margin="normal"
             placeholder="Contraseña"
@@ -171,15 +171,18 @@ export default function LoginForm() {
           </Link>
         </Grid>*/}
 
-        <Button
-          type="submit"
-          color="primary"
-          fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2 }}
-        >
-          Entrar
-        </Button>
+        <Box sx={{ textAlign: 'left', paddingX: 4 }}>
+          <Button
+            type="submit"
+            color="primary"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Entrar
+          </Button>
+        </Box>
+
         {/*
 <Button
           onClick={loginWithGoogle}
@@ -191,17 +194,18 @@ export default function LoginForm() {
           Entrar con google
         </Button>
           */}
-
-        <Link href="/register">
-          <Button
-            color="secondary"
-            fullWidth
-            variant="text"
-            sx={{ mt: 1, mb: 2 }}
-          >
-            Registrarse
-          </Button>
-        </Link>
+        <Box sx={{ textAlign: 'left', paddingX: 4 }}>
+          <Link href="/register">
+            <Button
+              color="secondary"
+              fullWidth
+              variant="text"
+              sx={{ mt: 1, mb: 2 }}
+            >
+              Registrarse
+            </Button>
+          </Link>
+        </Box>
       </Box>
     </Box>
   )

@@ -11,7 +11,7 @@ export default function AuthLayout() {
       <CssBaseline />
       <Box sx={{ flexGrow: 1 }}>
         <Grid container sx={{ height: '100vh' }}>
-          <Grid size={6}>
+          <Grid size={{ xs: 0, lg: 6 }}>
             <Box
               sx={{
                 backgroundImage: `url(${cover})`,
@@ -21,7 +21,7 @@ export default function AuthLayout() {
               }}
             />
           </Grid>
-          <Grid size={6} component={Paper} elevation={6} square>
+          <Grid size={{ xs: 12, lg: 6 }} component={Paper} elevation={6} square>
             <Box
               sx={{
                 display: 'flex',

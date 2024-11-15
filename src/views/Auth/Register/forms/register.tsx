@@ -73,8 +73,8 @@ export default function LoginForm() {
             backgroundImage: `url(${theme === 'dark' ? logow : logo})`,
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover',
-            height: '120px',
-            minWidth: '400px',
+            height: 'auto',
+            minWidth: { xs: '350px', md: '400px' },
           }}
         />
         {error && (

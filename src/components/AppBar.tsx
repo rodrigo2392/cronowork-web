@@ -8,16 +8,21 @@ import IconButton from '@mui/material/IconButton'
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountCircle from '@mui/icons-material/AccountCircle'
 import DarkMode from '@mui/icons-material/DarkMode'
+import Timer from '@mui/icons-material/Timer'
 import LightMode from '@mui/icons-material/LightMode'
 import LogoutIcon from '@mui/icons-material/Logout'
 import MoreIcon from '@mui/icons-material/MoreVert'
 import { useState } from 'react'
-import { Menu, MenuItem, Tooltip, Typography } from '@mui/material'
+import { Badge, Menu, MenuItem, Tooltip, Typography } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { signOut } from '../store/slices/auth.slice'
 import { useNavigate } from 'react-router-dom'
 import ArrowBack from '@mui/icons-material/ArrowBack'
-import { changeTheme, selectTheme } from '../store/slices/app.slice'
+import {
+  changeTheme,
+  selectIsTracking,
+  selectTheme,
+} from '../store/slices/app.slice'
 
 const drawerWidth = 300
 
@@ -57,6 +62,7 @@ export default function AppBarItem({
   const isMenuOpen = Boolean(anchorEl)
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl)
   const theme = useSelector(selectTheme)
+  const isTracking = useSelector(selectIsTracking)
 
   const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
@@ -188,6 +194,10 @@ export default function AppBarItem({
     dispatch(changeTheme())
   }
 
+  const goToTrack = () => {
+    navigate('/track')
+  }
+
   return (
     <>
       <AppBar
@@ -210,6 +220,27 @@ export default function AppBarItem({
           </IconButton>
 
           <Box sx={{ flexGrow: 1 }} />
+          {isTracking && (
+            <Box sx={{ marginRight: 4 }}>
+              <Tooltip title="Está capturando horas">
+                <IconButton
+                  size="large"
+                  edge="end"
+                  aria-label="tracking hours"
+                  aria-controls={menuId}
+                  aria-haspopup="true"
+                  onClick={goToTrack}
+                  color="inherit"
+                  sx={{ padding: 0 }}
+                >
+                  <Badge variant="dot" color="error">
+                    <Timer />
+                  </Badge>
+                </IconButton>
+              </Tooltip>
+            </Box>
+          )}
+
           <Box sx={{ marginRight: 2 }}>
             <Tooltip
               title={

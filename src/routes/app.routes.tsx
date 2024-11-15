@@ -5,20 +5,23 @@ import ClientsPage from '../views/App/Clients'
 import StopwatchPage from '../views/App/Stopwatch'
 import NotFound from '../views/NotFound'
 import AppLayout from '../layouts/app.layout'
+import { useSocket } from '../services/socket.service'
 
 export default function AppRoutes() {
+  useSocket()
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/clients" element={<ClientsPage />} />
-          <Route path="/projects" element={<ProjectsPage />} />
-          <Route path="/track" element={<StopwatchPage />} />
-
-          <Route path="*" element={<NotFound />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AppLayout />}>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/clients" element={<ClientsPage />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/track" element={<StopwatchPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   )
 }
