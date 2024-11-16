@@ -10,8 +10,10 @@ import {
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../store/slices/auth.slice'
 import { Link } from 'react-router-dom'
+import { useGetAllData } from '../../services/dashboard.service'
 
 export default function Home() {
+  const { data } = useGetAllData()
   const user = useSelector(selectUser)
   const getSaludo = () => {
     const date = new Date()
@@ -40,7 +42,7 @@ export default function Home() {
                 Horas totales
               </Typography>
               <Box sx={{ mt: 1 }}>
-                <Typography variant="h2">14</Typography>
+                <Typography variant="h2">{data?.data.hours}</Typography>
               </Box>
             </CardContent>
             <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -62,7 +64,7 @@ export default function Home() {
                 Proyectos registrados
               </Typography>
               <Box sx={{ mt: 1 }}>
-                <Typography variant="h2">14</Typography>
+                <Typography variant="h2">{data?.data.projects}</Typography>
               </Box>
             </CardContent>
             <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -84,7 +86,7 @@ export default function Home() {
                 Clientes registrados
               </Typography>
               <Box sx={{ mt: 1 }}>
-                <Typography variant="h2">14</Typography>
+                <Typography variant="h2">{data?.data.clients}</Typography>
               </Box>
             </CardContent>
             <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
